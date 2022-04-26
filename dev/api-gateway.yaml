@@ -13,7 +13,7 @@ spec:
         app: api-gateway
     spec:
       containers:
-        - image: kijaha/api-gateway:0.0.2
+        - image: kijaha/api-gateway:0.0.999
           imagePullPolicy: Always
           name: api-product
           ports:
