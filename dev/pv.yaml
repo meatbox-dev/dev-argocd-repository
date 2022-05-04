@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: meatbox-dev-pv
+  labels:
+    name: meatbox-dev-pv
+spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+  - ReadWriteMany
+  nfs:
+    server: fs-0e42c9695fa4656a2.efs.ap-northeast-2.amazonaws.com
+    path: /efs
