@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-jib-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: hello-jib
+  template:
+    metadata:
+      labels:
+        app: hello-jib
+    spec:
+      containers:
+        - image: nexus.meatmatch.kr:5000/hello-jib2:latest
+          imagePullPolicy: Always
+          name: hello-jib
+          ports:
+            - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-jib-cluster
+spec:
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    app: hello-jib
+  type: ClusterIP
