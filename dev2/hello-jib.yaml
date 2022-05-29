@@ -14,7 +14,6 @@ spec:
     spec:
       containers:
         - image: nexus.meatmatch.kr:5000/hello-jib2:latest
-          imagePullPolicy: Always
           name: hello-jib
           ports:
             - containerPort: 8080
