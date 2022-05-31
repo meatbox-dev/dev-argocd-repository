@@ -17,9 +17,6 @@ spec:
           name: hello-jib
           ports:
             - containerPort: 8080
-      dnsConfig:
-        nameservers:
-          - 8.8.8.8
       imagePullSecrets:
       - name: nexus-secret
 ---
