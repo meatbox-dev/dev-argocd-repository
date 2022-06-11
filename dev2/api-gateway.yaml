@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-gateway-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api-gateway
+  template:
+    metadata:
+      labels:
+        app: api-gateway
+    spec:
+      containers:
+        - image: nexus.meatmatch.kr:5000/meatbox-microservice-gateway:latest
+          name: api-gateway
+          ports:
+            - containerPort: 9999
+      imagePullSecrets:
+      - name: nexus-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: api-gateway-cluster
+spec:
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 9999
+  selector:
+    app: api-gateway
+  type: ClusterIP
