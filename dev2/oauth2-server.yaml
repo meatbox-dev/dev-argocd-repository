@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: oauth2-server-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: oauth2-server
+  template:
+    metadata:
+      labels:
+        app: oauth2-server
+    spec:
+      containers:
+        - image: nexus.meatmatch.kr:5000/meatbox-microservice-oauth:latest
+          name: oauth2-server
+          ports:
+            - containerPort: 8888
+      imagePullSecrets:
+      - name: nexus-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: oauth2-server-cluster
+spec:
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 8888
+  selector:
+    app: oauth2-server
+  type: ClusterIP
