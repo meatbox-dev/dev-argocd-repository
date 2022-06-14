@@ -26,7 +26,7 @@ metadata:
   name: oauth2-server-cluster
 spec:
   ports:
-    - port: 80
+    - port: 8888
       protocol: TCP
       targetPort: 8888
   selector:
