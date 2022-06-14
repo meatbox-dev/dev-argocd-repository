@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: message-server-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: message-server
+  template:
+    metadata:
+      labels:
+        app: message-server
+    spec:
+      containers:
+        - image: nexus.meatmatch.kr:5000/meatbox-microservice-message:latest
+          name: message-server
+          ports:
+            - containerPort: 8080
+      imagePullSecrets:
+      - name: nexus-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: message-server-cluster
+spec:
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    app: message-server
+  type: ClusterIP
+  clusterIP: None
