@@ -31,4 +31,4 @@ spec:
       targetPort: 9999
   selector:
     app: api-gateway
-  type: ClusterIP
+  type: NodePort
