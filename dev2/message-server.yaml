@@ -16,7 +16,7 @@ spec:
         - image: nexus.meatmatch.kr:5000/meatbox-microservice-message:latest
           name: message-server
           ports:
-            - containerPort: 8080
+            - containerPort: 9092
       imagePullSecrets:
       - name: nexus-secret
 ---
@@ -28,7 +28,7 @@ spec:
   ports:
     - port: 80
       protocol: TCP
-      targetPort: 8080
+      targetPort: 9092
   selector:
     app: message-server
   type: ClusterIP
